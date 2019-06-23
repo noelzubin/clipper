@@ -1,0 +1,8 @@
+name: clipper
+version: "0.0.1"
+about: do actions with system selections 
+subcommands:
+  - bookmark:
+      about: save link to trello 
+  - notes:
+      about: save selection to configured notes file 
