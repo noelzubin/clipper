@@ -2,8 +2,8 @@ use crate::action::Action;
 use crate::config::Config;
 use crate::error::ClipperError;
 use crate::utils::get_string_from_conf;
-use reqwest::{Client, Error, Response, Url};
-use std::process;
+use reqwest::{Client, Error, Response, Url}; use std::process;
+use notify_rust::Notification;
 
 const API_KEY_CONF: &str = "trello_api_key";
 const API_TOKEN_CONF: &str = "trello_api_token";
@@ -70,6 +70,16 @@ impl Trello {
             ],
         )
         .unwrap();
+        self.show_succes_notification(url.as_ref());
+    }
+
+    fn show_succes_notification(&self, url: &str) { 
+        Notification::new()
+            .summary("Trello bookmark added")
+            .body(&format!("Added bookmark for {}", url))
+            .icon("trello")
+            .show()
+            .unwrap();
     }
 }
 
